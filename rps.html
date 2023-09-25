@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="rps.css">
+</head>
+<body>
+    <h1>Rock Paper Scissors!</h1>
+    <img src="pMark.png" id="player">
+    <img src="cMark.png" id="computer">
+    <div>
+        <input type="radio" value="Rock" id="rock" name="options" onclick=playGame()>
+        <label for="rock">Rock</label>
+        <input type="radio" value="Paper" id="paper" name="options" onclick=playGame()>
+        <label for="rock">Paper</label>
+        <input type="radio" value="Scissors" id="scissors" name="options" onclick=playGame()>
+        <label for="rock">Scissors</label>
+    </div>
+    <p id="result"></p>
+    <p id="cWins"></p>
+    <p id="pWins"></p>
+</body>
+
+<script>
+
+let winComputer = 0;
+let winPlayer = 0;
+
+function playGame() {
+    if (document.getElementById("rock").checked == 1) {
+        document.getElementById("player").src = "pRock.png";
+        document.getElementById("player").alt = "rock";
+    }
+    if (document.getElementById("paper").checked == 1) {
+        document.getElementById("player").src = "pPaper.png";
+        document.getElementById("player").alt = "paper";
+    }
+    if (document.getElementById("scissors").checked == 1) {
+        document.getElementById("player").src = "pScissors.png";
+        document.getElementById("player").alt = "scissors";
+    }
+    let cIndex = Math.floor(Math.random() * 3);
+    let cOptions = [
+        "cRock.png", 
+        "cPaper.png",
+        "cScissors.png"
+    ];
+    let cAlt = [
+        "rock",
+        "paper",
+        "scissors"
+    ]
+    document.getElementById("computer").src = cOptions[cIndex];
+    document.getElementById("computer").alt = cAlt[cIndex]; 
+    evalWin();
+    checkWin();
+}
+
+function evalWin() {
+    let computer = document.getElementById("computer").alt;
+    let player = document.getElementById("player").alt;
+
+    //player is rock
+    if (player == "rock" && computer == "rock") {
+        let result = "Draw!";
+        document.getElementById("result").innerHTML = result;
+    }
+    if (player == "rock" && computer == "paper") {
+        let result = "You lose!";
+        document.getElementById("result").innerHTML = result;
+        winComputer++;
+        document.getElementById("cWins").innerHTML = "Computer: " + winComputer + " wins";
+    }
+    if (player == "rock" && computer == "scissors") {
+        let result = "You win!";
+        document.getElementById("result").innerHTML = result;
+        winPlayer++;
+        document.getElementById("pWins").innerHTML = "Player: " + winPlayer + " wins";
+    }
+    //player is paper
+    if (player == "paper" && computer == "paper") {
+        let result = "Draw!";
+        document.getElementById("result").innerHTML = result;
+    }
+    if (player == "paper" && computer == "rock") {
+        let result = "You win!";
+        document.getElementById("result").innerHTML = result;
+        winPlayer++;
+        document.getElementById("pWins").innerHTML = "Player: " + winPlayer + " wins";
+    }
+    if (player == "paper" && computer == "scissors") {
+        let result = "You lose!";
+        document.getElementById("result").innerHTML = result;
+        winComputer++;
+        document.getElementById("cWins").innerHTML = "Computer: " + winComputer + " wins";
+    }
+    //player is scissors
+    if (player == "scissors" && computer == "scissors") {
+        let result = "Draw!";
+        document.getElementById("result").innerHTML = result;
+    }
+    if (player == "scissors" && computer == "rock") {
+        let result = "You lose!";
+        document.getElementById("result").innerHTML = result;
+        winComputer++;
+        document.getElementById("cWins").innerHTML = "Computer: " + winComputer + " wins";
+    }
+    if (player == "scissors" && computer == "paper") {
+        let result = "You win!";
+        document.getElementById("result").innerHTML = result;
+        winPlayer++;
+        document.getElementById("pWins").innerHTML = "Player: " + winPlayer + " wins";
+    }
+}
+
+function checkWin() {
+    if (winPlayer + winComputer == 5 && winPlayer>winComputer) {
+        window.alert("Game over! You win!");
+        location.reload();
+    }
+    if (winPlayer + winComputer == 5 && winPlayer<winComputer) {
+        window.alert("Game over! You lose!");
+        location.reload();
+    } 
+}
+</script>
+
+</html>
