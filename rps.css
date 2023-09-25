@@ -1,0 +1,11 @@
+body {
+    width: 50%;
+}
+
+div.player {
+    width: 45%;
+}
+
+div.computer {
+    width: 45%
+}
